@@ -1,0 +1,65 @@
+//
+//  PlanetCardView.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 01/01/2026.
+//
+
+import SwiftUI
+
+struct PlanetCardView: View {
+    
+    let planet: Planets
+    
+    var body: some View {
+        ZStack{
+           
+            VStack(alignment: .leading, spacing: 10) {
+                Text(planet.name)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundStyle(.black)
+                Text(planet.resume)
+                    .foregroundStyle(.black)
+            }
+            .padding()
+            .frame(width: 250, height: 400)
+            .background(planet.color.secondary)
+            .cornerRadius(20)
+            .padding()
+            .overlay(
+                Image(planet.image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250)
+                    .offset(y: -120),
+                alignment: .top
+            )
+            
+            
+            Image(systemName: "arrow.right")
+                .foregroundStyle(.white)
+                .padding(20)
+                .background(planet.color)
+                .clipShape(Circle())
+                    .cornerRadius(25)
+                 .overlay(
+                     Circle()
+                       .stroke(.black, lineWidth: 1))
+                
+                .offset(x: 125, y: 190)
+        }
+        .padding(.top, 140)
+        .padding(.bottom, 140)
+        
+    }
+    
+}
+
+//#Preview {
+//    PlanetCardView(planet:  Planet(name: "Soleil", resume: "Le Soleil est une étoile de type naine jaune située au centre du système solaire. Il fournit lumière et chaleur, rendant possible la vie sur Terre grâce à son rayonnement.", details: "Le Soleil, notre étoile, est une sphère massive de gaz chaud principalement composée d’hydrogène (environ 74 %) et d’hélium (environ 25 %), avec des traces d’éléments plus lourds tels que l’oxygène, le carbone et le fer. Son diamètre est d’environ 1,4 million de kilomètres, soit plus de 100 fois celui de la Terre, et sa masse représente environ 99,85 % de celle du système solaire.\n\nAu cœur du Soleil, la température atteint environ 15 millions de degrés Celsius, créant des conditions extrêmes de pression et de chaleur. Dans ce noyau, des réactions de fusion nucléaire transforment l’hydrogène en hélium, libérant une énergie colossale qui met environ un million d’années à atteindre la surface. Cette énergie est ensuite émise sous forme de lumière et de chaleur, essentielles à la vie sur Terre.", image: "sun", color: .yellow))
+//}
+
+#Preview {
+    PlanetCardView(planet: .mercury)
+}
