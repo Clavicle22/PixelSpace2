@@ -1,0 +1,50 @@
+//
+//  FuseeDetailView.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 02/01/2026.
+//
+
+import SwiftUI
+
+struct FuseeDetailView: View {
+    
+    var fusee: Fusees
+
+    var body: some View {
+        
+        ZStack{
+            Color.black
+                .ignoresSafeArea()
+            
+            ScrollView {
+                VStack {
+                    VStack(alignment: .leading){
+                        Image(fusee.image)
+                            .resizable()
+                            .scaledToFit()
+                            .clipped()
+                            .frame(width: 80, height: 100)
+                            .rotationEffect(.degrees(90))
+                        Text(fusee.name)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text(fusee.description)
+                            .font(.caption)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(.white)
+                    .cornerRadius(20)
+                    .padding()
+                    FuseeCardCrewView(fusee: .apollo8)
+                }
+                .padding()
+            }
+        }
+    }
+}
+
+#Preview {
+    FuseeDetailView(fusee: .apollo8)
+}
