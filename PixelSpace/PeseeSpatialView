@@ -1,0 +1,128 @@
+//
+//  PeseeSpatial.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 02/01/2026.
+//
+
+import SwiftUI
+
+struct PeseeSpatialView: View {
+    
+    @State var fusee : Fusees
+    @State var planet: Planets
+    @State var personWeight = ""
+    @State  var selectedPlanet: Planets
+    @State  var confirmationMessage: String = ""
+
+
+    
+    let columns: [GridItem] = [
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110))
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+
+                VStack(alignment: .leading, spacing: 30) {
+
+                    VStack(alignment: .leading) {
+                        Text("Pesée spatiale")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+
+                        Text("Calcule ton poids selon la planète")
+                            .foregroundColor(.gray)
+                        Spacer(minLength: 10)
+                        
+                        
+                        VStack(alignment: .leading, spacing: 20){
+                            TextField("Poids sur Terre (kg)", text: $personWeight)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(.roundedBorder)
+                                .onChange(of: personWeight) {
+                                    personWeight = filterNumericInput(personWeight)
+                                }
+                            Text("Ton poids sur \(planet.name) :")
+                                .foregroundStyle(.white)
+                                .font(.title)
+                                .fontWeight(.bold)
+                            Text("\(calculatedWeight, specifier: "%.1f") kg")
+                                .foregroundStyle(.white)
+                       
+                            .font(.title2)
+                         
+
+
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 80)
+
+                    // ⬇️ Entrée du poids
+                  
+                    ScrollView {
+                        LazyVGrid(columns: columns) {
+                            ForEach(Planets.allCases) { planet in
+                                Button {
+                                    selectedPlanet = planet
+                                } label: {
+                                    Image(planet.image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle()
+                                                .stroke(
+                                                    planet == selectedPlanet ? .blue : .clear,
+                                                    lineWidth: 3
+                                                )
+                                        )
+                                }
+                            }
+                        }
+                    }
+
+                
+
+                    Spacer()
+                }
+            }
+        }
+    }
+
+    // ✅ ta fonction est parfaitement bien
+    func weightOnPlanet(personWeight: Double, planet: Planets) -> Double {
+        personWeight * planet.gravityFactor
+    }
+
+    // ✅ propriété calculée
+    var calculatedWeight: Double {
+        guard let weight = Double(personWeight) else { return 0 }
+        return weightOnPlanet(personWeight: weight, planet: selectedPlanet)
+    }
+}
+
+func filterNumericInput(_ input: String) -> String {
+    let allowedCharacters = "0123456789.,"
+    let filtered = input.filter { allowedCharacters.contains($0) }
+
+    // Empêche plusieurs points ou virgules
+    let components = filtered.split(whereSeparator: { $0 == "." || $0 == "," })
+    if components.count > 2 {
+        return String(filtered.dropLast())
+    }
+
+    return filtered
+}
+
+#Preview {
+    PeseeSpatialView(fusee: .apollo8, planet: .earth, selectedPlanet: .earth)
+
+}
