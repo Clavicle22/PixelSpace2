@@ -1,0 +1,80 @@
+//
+//  FuseeCardView.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 03/01/2026.
+//
+
+import SwiftUI
+
+struct FuseeCardView: View {
+    
+    @State var fusee : Fusees
+
+    
+    let columns: [GridItem] = [
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110))
+    ]
+    
+    var body: some View {
+        
+        ZStack{
+            Color.black
+                .ignoresSafeArea()
+            
+            VStack {
+//                ScrollView {
+//                    
+//                    LazyVGrid(columns: columns, spacing: 20) {
+//                        ForEach(Fusees.allCases) { fusee in
+//                            
+//                            
+//                            VStack {
+//                                Image(fusee.image)
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 80, height: 70)
+//                                Text(fusee.name)
+//                                    .font(.caption)
+//                                    .fontWeight(.bold)
+//                                
+//                            }
+//                            .frame(width: 80, height: 110)
+//                            .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
+//                            //                            .onTapGesture {
+//                            //                                NavigationLink(destination: FuseeDetailView(fusee: .apollo8)) {
+//                            //
+//                            //
+//                            //                                }
+//                            //
+//                            //
+//                            //                            }
+//                            .padding(.horizontal)
+//                        }
+//                    }
+//                }
+                
+                Image(fusee.image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 70)
+                Text(fusee.name)
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.black)
+                
+            }
+            .frame(width: 80, height: 110)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
+            .padding(.horizontal)
+
+            }
+        }
+    
+}
+
+#Preview {
+    FuseeCardView(fusee: .apollo7)
+}
