@@ -1,0 +1,75 @@
+//
+//  FuseeView.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 02/01/2026.
+//
+
+import SwiftUI
+
+struct FuseeView: View {
+    
+    @State var fusee : Fusees
+    
+    let columns: [GridItem] = [
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110)),
+        GridItem(.fixed(110))
+    ]
+    
+//    func weight 
+    
+    var body: some View {
+        NavigationStack {
+            
+            ZStack{
+                Color.black
+                    .ignoresSafeArea()
+                
+                VStack(alignment: .leading) {
+                    
+                    //                     HEADER CUSTOM
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Fusée")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Text("Découvre les fusées et leurs missions les plus célèbres de l'histoire spatiale.")
+                            .font(.title2)
+                            .foregroundColor(.gray)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top,100)
+                    
+                    
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(Fusees.allCases) { fusee in
+                        NavigationLink(destination:
+                                        FuseeDetailView(fusee: fusee)) {
+                           
+                                    FuseeCardView(fusee: fusee)
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+}
+
+
+#Preview {
+    FuseeView(fusee: .apollo8)
+}
+
+
+//func rollTheDice() {
+//    let number = Int.random(in: 1...6)
+//    face = "die.face.\(number).fill"
+//}
