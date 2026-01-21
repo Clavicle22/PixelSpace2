@@ -1,0 +1,302 @@
+CREWS 
+
+import Foundation
+
+
+enum MemberCrews: String, CaseIterable, Identifiable {
+    case crew1
+    case crew2
+    case crew3
+    case crew4
+
+    var id: Self { self }
+    
+    struct MemberCrewInfo: Identifiable {
+        var id = UUID()
+        var name: String
+        var role: String
+        var background: String
+        var birthdate: String
+        var description: String
+        var countryFlag: String
+        var country: String
+    }
+
+    var info: MemberCrewInfo {
+        switch self {
+        case .crew1:
+            return MemberCrewInfo(
+                name: "Frank Borman",
+                role: "Commandant",
+                background: "Astronaute de la NASA",
+                birthdate: "14 mars 1928",
+                description: "Frank Borman est le commandant de la mission Apollo 8...",
+                countryFlag: "🇺🇸",
+                country: "Etats-unis"
+            
+            )
+
+        case .crew2:
+            return MemberCrewInfo(
+                name: "James A. Lovell Jr.",
+                role: "Pilot du module de commande",
+                background: "Astronaute de la NASA",
+                birthdate: "18 avril 1932",
+                description: "James A. Lovell Jr. est un astronaute américain connu pour...",
+                countryFlag: "🇯🇵",
+                country: "Japon"
+            )
+
+        case .crew3:
+            return MemberCrewInfo(
+                name: "William A. Anders",
+                role: "Pilote du module lunaire",
+                background: "Astronaute de la NASA",
+                birthdate: "17 octobre 1933",
+                description: "William Anders est célèbre pour la photo Earthrise...",
+                countryFlag: "🇺🇸",
+                country: "Etats-unis"
+            )
+
+        case .crew4:
+            return MemberCrewInfo(
+                name: "Julie Huhue",
+                role: "Scientist",
+                background: "Astronaute de la NASA",
+                birthdate: "—",
+                description: "Scientifique spécialisée dans les missions spatiales...",
+                countryFlag: "🇧🇷",
+                country: "Brézil"
+            )
+        }
+    }
+}
+
+
+
+______
+
+FUSEES 
+
+//
+//  Fusees.swift
+//  PixelSpace
+//
+//  Created by Gaëll on 02/01/2026.
+//
+
+import Foundation
+
+enum Fusees: String, CaseIterable, Identifiable {
+    case apollo1
+    case apollo7
+    case apollo8
+    case apollo9
+    case STS1
+    case crew1
+    case soyouz1
+    case crew2
+    
+    var id: Self { self }
+    
+    var name: String {
+        switch self {
+        case .apollo1:
+            "Apollo 01"
+        case .apollo7:
+            "Apollo 07"
+        case .apollo8:
+            "Apollo 08"
+        case .apollo9:
+            "Apollo 09"
+        case .STS1:
+            "STS-1"
+        case .crew1:
+            "Crew-1"
+        case .soyouz1:
+            "Soyouz 01"
+        case .crew2:
+            "Crew-2"
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .apollo1: "apollo"
+        case .apollo7: "apollo"
+        case .apollo8: "apollo"
+        case .apollo9: "apollo"
+        case .STS1: "navette"
+        case .crew1: "crew"
+        case .soyouz1: "soyouz"
+        case .crew2: "crew"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .apollo1:
+            ""
+        case .apollo7:
+            ""
+        case .apollo8:
+            "Apollo 8 fut la première mission habitée à quitter l’orbite terrestre et à orbiter autour de la Lune. Lancée le 21 décembre 1968, elle transporta Frank Borman, James Lovell et William Anders à bord du module de commande Columbia. Après un voyage de près de 400 000 km, l’équipage effectua 10 orbites lunaires en 20 heures, réalisant des observations détaillées et capturant la célèbre photo “Earthrise”, montrant la Terre se levant au-dessus de l’horizon lunaire. Le 24 décembre, ils diffusèrent en direct une lecture de la Genèse, suivie par des millions de personnes sur Terre. La mission s’acheva avec un retour réussi le 27 décembre 1968, préparant ainsi le terrain pour l’alunissage d’Apollo 11 l’année suivante."
+        case .apollo9:
+            ""
+        case .STS1:
+            ""
+        case .crew1:
+            ""
+        case .soyouz1:
+            ""
+        case .crew2:
+            ""
+        }
+    }
+    
+    var crewMemberParticipant: [MemberCrews] {
+        switch self {
+        case .apollo1:
+            [.crew1, .crew2]
+        case .apollo7:
+            [.crew3, .crew4]
+        case .apollo8:
+            [.crew1, .crew2, .crew3]
+        case .apollo9:
+            [.crew3, .crew4]
+        case .STS1:
+            [.crew3, .crew4]
+        case .crew1:
+            [.crew3, .crew4]
+        case .soyouz1:
+            [.crew3, .crew4]
+        case .crew2:
+            [.crew3, .crew4]
+        }
+    }
+    
+}
+
+_____
+PLANETS
+
+import Foundation
+import SwiftUI
+
+enum Planets: String, CaseIterable, Identifiable {
+    case sun
+    case mercury
+    case venus
+    case earth
+    case uranus
+    case neptune
+    case saturn
+    case jupiter
+    case mars
+
+    var id: Self { self }
+
+    
+    var name: String {
+        switch self {
+        case .sun: "Soleil"
+        case .mercury: "Mercure"
+        case .venus: "Vénus"
+        case .earth: "Terre"
+        case .uranus: "Uranus"
+        case .neptune: "Nepture"
+        case .saturn: "Saturne"
+        case .jupiter: "Jupiter"
+        case .mars: "Mars"
+        }
+    }
+    
+    var resume: String {
+        switch self {
+        case .sun: "Le Soleil est une étoile de type naine jaune située au centre du système solaire. Il fournit lumière et chaleur, rendant possible la vie sur Terre grâce à son rayonnement."
+        case .mercury: "Mercure est la planète la plus proche du Soleil et la plus petite du système solaire. Elle se distingue par des variations de température extrêmes entre le jour et la nuit."
+        case .venus: "Vénus est la deuxième planète du système solaire et la plus chaude. Elle possède une atmosphère dense responsable d’un puissant effet de serre."
+        case .earth: "La Terre est la troisième planète du système solaire et la seule connue à abriter la vie. Elle possède de l’eau liquide en abondance et une atmosphère protectrice."
+        case .uranus: ""
+        case .neptune: ""
+        case .saturn: ""
+        case .jupiter: ""
+        case .mars: ""
+        }
+    }
+    
+    var details: String {
+        switch self {
+        case .sun:
+            "Le Soleil, notre étoile, est une sphère massive de gaz chaud principalement composée d’hydrogène (environ 74 %) et d’hélium (environ 25 %), avec des traces d’éléments plus lourds tels que l’oxygène, le carbone et le fer. Son diamètre est d’environ 1,4 million de kilomètres, soit plus de 100 fois celui de la Terre, et sa masse représente environ 99,85 % de celle du système solaire.\n\nAu cœur du Soleil, la température atteint environ 15 millions de degrés Celsius, créant des conditions extrêmes de pression et de chaleur. Dans ce noyau, des réactions de fusion nucléaire transforment l’hydrogène en hélium, libérant une énergie colossale qui met environ un million d’années à atteindre la surface. Cette énergie est ensuite émise sous forme de lumière et de chaleur, essentielles à la vie sur Terre."
+        case .mercury:
+            "Mercure est une planète rocheuse dépourvue d’atmosphère significative, ce qui empêche la régulation de sa température. En journée, la température peut atteindre environ 430 °C, tandis qu’elle chute jusqu’à −180 °C la nuit. Son diamètre est d’environ 4 880 kilomètres, légèrement plus grand que celui de la Lune.\n\nLa surface de Mercure est fortement cratérisée, témoignant de nombreux impacts de météorites. Son noyau métallique, très volumineux par rapport à sa taille, représente une grande partie de sa masse. Mercure effectue une rotation lente sur elle-même, mais orbite rapidement autour du Soleil, complétant une révolution en seulement 88 jours terrestres."
+        case .venus:
+            "Vénus est une planète rocheuse de taille similaire à la Terre, avec un diamètre d’environ 12 100 kilomètres. Son atmosphère est composée principalement de dioxyde de carbone, avec des nuages d’acide sulfurique, ce qui piège la chaleur et provoque des températures de surface avoisinant les 465 °C.\n\nLa planète tourne très lentement sur elle-même et dans le sens inverse de la plupart des autres planètes. Sa surface est marquée par des plaines volcaniques, des montagnes et des volcans, indiquant une activité géologique passée (et peut-être encore présente)."
+        case .earth:
+            "La Terre est une planète rocheuse d’un diamètre d’environ 12 742 kilomètres. Son atmosphère, composée principalement d’azote et d’oxygène, régule la température et protège la surface des rayonnements solaires nocifs. La présence d’un champ magnétique puissant contribue également à cette protection.\n\nEnviron 71 % de la surface terrestre est recouverte d’eau liquide, condition essentielle au développement de la vie. La Terre effectue une rotation complète en 24 heures et une révolution autour du Soleil en 365 jours, ce qui rythme les cycles jour-nuit et les saisons."
+        case .uranus: ""
+        case .neptune: ""
+        case .saturn: ""
+        case .jupiter: ""
+        case .mars: ""
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .sun:
+            "sun"
+        case .mercury:
+            "mercure"
+        case .venus:
+            "venus"
+        case .earth:
+            "earth"
+        case .uranus: "uranus"
+        case .neptune: "neptune"
+        case .saturn: "saturn"
+        case .jupiter: "jupiter"
+        case .mars: "mars"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .sun:
+                .yellow
+        case .mercury:
+                .gray
+        case .venus:
+                .orange
+        case .earth:
+                .blue
+        case .uranus: .purple
+        case .neptune: .cyan
+        case .saturn: .green
+        case .jupiter: .brown
+        case .mars: .red
+        }
+    }
+    
+    var gravityFactor: Double {
+        switch self {
+        case .sun: 27.9
+        case .mercury: 0.38
+        case .venus: 0.90
+        case .earth: 1.0
+        case .mars: 0.38
+        case .jupiter: 2.53
+        case .saturn: 1.06
+        case .uranus: 0.89
+        case .neptune: 1.14
+        }
+    }
+    func weight(onEarth earthWeight: Double) -> Double {
+          earthWeight * gravityFactor
+      }
+  
+}
+
+
+
